@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chatbot Widget - Development</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f5f5f5;
+      }
+      .demo-container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      .demo-header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .demo-content {
+        min-height: 400px;
+        border: 2px dashed #ddd;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #666;
+        font-size: 18px;
+      }
+      .widget-config {
+        margin-top: 20px;
+        padding: 15px;
+        background: #f8f9fa;
+        border-radius: 4px;
+      }
+      .config-row {
+        margin-bottom: 10px;
+      }
+      .config-row label {
+        display: inline-block;
+        width: 120px;
+        font-weight: bold;
+      }
+      .config-row input,
+      .config-row select {
+        padding: 5px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+      }
+      button {
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        margin: 5px;
+      }
+      button:hover {
+        background: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="demo-container">
+      <div class="demo-header">
+        <h1>Chatbot Widget Development</h1>
+        <p>
+          This page is used for testing and developing the embeddable chatbot
+          widget.
+        </p>
+      </div>
+
+      <div class="demo-content">
+        <p>Widget will appear here when initialized</p>
+      </div>
+
+      <div class="widget-config">
+        <h3>Widget Configuration</h3>
+        <div class="config-row">
+          <label>API Base URL:</label>
+          <input
+            type="text"
+            id="apiBaseUrl"
+            value="https://your-backend.railway.app"
+          />
+        </div>
+        <div class="config-row">
+          <label>API Key:</label>
+          <input type="text" id="apiKey" value="your-api-key" />
+        </div>
+        <div class="config-row">
+          <label>Position:</label>
+          <select id="position">
+            <option value="bottom-right">Bottom Right</option>
+            <option value="bottom-left">Bottom Left</option>
+            <option value="top-right">Top Right</option>
+            <option value="top-left">Top Left</option>
+          </select>
+        </div>
+        <div class="config-row">
+          <label>Theme:</label>
+          <select id="theme">
+            <option value="default">Default</option>
+            <option value="dark">Dark</option>
+            <option value="light">Light</option>
+          </select>
+        </div>
+        <div class="config-row">
+          <button onclick="initializeWidget()">Initialize Widget</button>
+          <button onclick="showWidget()">Show Widget</button>
+          <button onclick="hideWidget()">Hide Widget</button>
+          <button onclick="destroyWidget()">Destroy Widget</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+    <script>
+      let widget = null;
+
+      function initializeWidget() {
+        const config = {
+          apiBaseUrl: document.getElementById("apiBaseUrl").value,
+          apiKey: document.getElementById("apiKey").value,
+          position: document.getElementById("position").value,
+          theme: document.getElementById("theme").value,
+        };
+
+        console.log("Initializing widget with config:", config);
+
+        // This will be implemented when the widget is ready
+        if (window.ChatbotWidget) {
+          widget = new window.ChatbotWidget.WidgetContainer();
+          widget.initialize(config);
+        } else {
+          console.log(
+            "Widget not yet available - this is expected during development"
+          );
+        }
+      }
+
+      function showWidget() {
+        if (widget) {
+          widget.show();
+        } else {
+          console.log("Widget not initialized");
+        }
+      }
+
+      function hideWidget() {
+        if (widget) {
+          widget.hide();
+        } else {
+          console.log("Widget not initialized");
+        }
+      }
+
+      function destroyWidget() {
+        if (widget) {
+          widget.destroy();
+          widget = null;
+        } else {
+          console.log("Widget not initialized");
+        }
+      }
+    </script>
+  </body>
+</html>
